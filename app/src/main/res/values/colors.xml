@@ -5,26 +5,25 @@
     <color name="colorPrimaryDark">#0D47A1</color>
     <color name="colorAccent">#00BCD4</color>
 
-    <!-- Backgrounds -->
-    <color name="cardBackground">#1E3A5F</color>
-    <color name="cardBackgroundLight">#2A4A7F</color>
-    <color name="gradientStart">#0F2027</color>
-    <color name="gradientMid">#203A43</color>
-    <color name="gradientEnd">#2C5364</color>
-    <color name="statCardBg">#1A2F4A</color>
-    <color name="searchBarBg">#1E3A5F</color>
-    <color name="windowBackground">#0F2027</color>
+    <!-- Backgrounds — LIGHT MODE -->
+    <color name="cardBackground">#FFFFFF</color>
+    <color name="cardBackgroundLight">#E3F2FD</color>
+    <color name="gradientStart">#E3F2FD</color>
+    <color name="gradientMid">#BBDEFB</color>
+    <color name="gradientEnd">#90CAF9</color>
+    <color name="statCardBg">#FFFFFF</color>
+    <color name="searchBarBg">#FFFFFF</color>
+    <color name="windowBackground">#E3F2FD</color>
 
-    <!-- Text — always white (dark bg app) -->
-    <color name="textPrimary">#FFFFFF</color>
-    <color name="textSecondary">#B0BEC5</color>
-    <color name="textHint">#78909C</color>
+    <!-- Text — LIGHT MODE (dark text on light bg) -->
+    <color name="textPrimary">#0D1B2A</color>
+    <color name="textSecondary">#455A64</color>
+    <color name="textHint">#90A4AE</color>
 
     <!-- Status -->
     <color name="colorError">#EF5350</color>
     <color name="colorSuccess">#66BB6A</color>
 
-    <!-- Black for status bar icons in light mode -->
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 </resources>

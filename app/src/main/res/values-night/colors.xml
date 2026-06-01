@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary brand colors -->
+    <color name="colorPrimary">#1976D2</color>
+    <color name="colorPrimaryDark">#0D47A1</color>
+    <color name="colorAccent">#00BCD4</color>
+
+    <!-- Backgrounds — DARK MODE -->
+    <color name="cardBackground">#1E3A5F</color>
+    <color name="cardBackgroundLight">#2A4A7F</color>
+    <color name="gradientStart">#0F2027</color>
+    <color name="gradientMid">#203A43</color>
+    <color name="gradientEnd">#2C5364</color>
+    <color name="statCardBg">#1A2F4A</color>
+    <color name="searchBarBg">#1E3A5F</color>
+    <color name="windowBackground">#0F2027</color>
+
+    <!-- Text — DARK MODE (light text on dark bg) -->
+    <color name="textPrimary">#FFFFFF</color>
+    <color name="textSecondary">#B0BEC5</color>
+    <color name="textHint">#78909C</color>
+
+    <!-- Status -->
+    <color name="colorError">#EF5350</color>
+    <color name="colorSuccess">#66BB6A</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>

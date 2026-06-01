@@ -4,11 +4,13 @@
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorSurface">@color/cardBackground</item>
-        <item name="colorOnSurface">@color/white</item>
+        <item name="colorOnSurface">@color/textPrimary</item>
         <item name="android:windowBackground">@color/gradientStart</item>
         <item name="android:statusBarColor">@color/gradientStart</item>
         <item name="android:navigationBarColor">@color/gradientStart</item>
-        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorPrimary">@color/textPrimary</item>
         <item name="android:textColorSecondary">@color/textSecondary</item>
+        <!-- Light mode: dark status bar icons -->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

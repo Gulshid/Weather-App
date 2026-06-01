@@ -46,8 +46,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun setupViews() {
 
+        // ── Set theme toggle icon based on current mode ───────────
+        updateThemeToggleIcon()
+
         // ── Receive city name back from SearchFragment ────────────
-        // FIXED: moved here from onViewCreated so it runs at the right time
         findNavController()
             .currentBackStackEntry
             ?.savedStateHandle
@@ -55,7 +57,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             ?.observe(viewLifecycleOwner) { cityName ->
                 if (!cityName.isNullOrBlank()) {
                     viewModel.fetchWeather(cityName)
-                    // Clear so rotation doesn't re-trigger
                     findNavController()
                         .currentBackStackEntry
                         ?.savedStateHandle
@@ -122,6 +123,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             isCelsius = celsius
             updateUnitToggleUI(celsius)
         }
+    }
+
+    // ── Theme icon ────────────────────────────────────────────────
+
+    private fun updateThemeToggleIcon() {
+        val isDark = requireContext()
+            .getSharedPreferences("weather_prefs", android.content.Context.MODE_PRIVATE)
+            .getBoolean("dark_mode", true)
+        val iconRes = if (isDark) R.drawable.ic_sun else R.drawable.ic_moon
+        binding.btnToggleTheme.setImageResource(iconRes)
+        binding.btnToggleTheme.clearColorFilter()
+        binding.btnToggleTheme.contentDescription =
+            if (isDark) "Switch to light mode" else "Switch to dark mode"
     }
 
     // ── Location helpers ──────────────────────────────────────────
