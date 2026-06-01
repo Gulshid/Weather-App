@@ -1,18 +1,25 @@
+import java.util.Properties
+
+// ── Read API key from local.properties securely ──────────────────
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+}
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    // Hilt
     id("com.google.dagger.hilt.android")
-    // KSP for Room & Hilt code generation
     id("com.google.devtools.ksp")
 }
 
 android {
-    namespace = "com.yourname.weatherapp"
+    namespace = "com.gulshid.weatherapp"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.yourname.weatherapp"
+        applicationId = "com.gulshid.weatherapp"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -20,11 +27,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // API key from local.properties — we'll set this up in Step 5
+        // ── API key read from local.properties — never hardcoded ──
         buildConfigField(
             "String",
             "WEATHER_API_KEY",
-            "\"${project.findProperty("WEATHER_API_KEY") ?: ""}\""
+            "\"${localProperties.getProperty("WEATHER_API_KEY", "")}\""
         )
     }
 
@@ -47,10 +54,9 @@ android {
         jvmTarget = "11"
     }
 
-    // Enable ViewBinding — no more findViewById!
     buildFeatures {
         viewBinding = true
-        buildConfig = true  // needed for BuildConfig.WEATHER_API_KEY
+        buildConfig = true
     }
 }
 

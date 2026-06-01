@@ -7,7 +7,7 @@ import com.gulshid.weatherapp.data.remote.api.WeatherApiService
 import com.gulshid.weatherapp.domain.model.WeatherModel
 import com.gulshid.weatherapp.domain.repository.WeatherRepository
 import com.gulshid.weatherapp.utils.Resource
-import com.yourname.weatherapp.BuildConfig
+import com.gulshid.weatherapp.BuildConfig
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -30,8 +30,9 @@ class WeatherRepositoryImpl @Inject constructor(
 ) : WeatherRepository {
 
     override fun getWeather(cityName: String): Flow<Resource<WeatherModel>> = flow {
+        // TEMP: verify key is loaded — remove after testing
+        android.util.Log.d("API_KEY", "Key = '${BuildConfig.WEATHER_API_KEY}'")
 
-        // Step 1: Tell UI we're loading
         emit(Resource.Loading)
 
         try {

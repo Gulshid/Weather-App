@@ -3,7 +3,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/textPrimary</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:windowBackground">@color/gradientStart</item>
         <item name="android:statusBarColor">@color/gradientStart</item>
         <item name="android:navigationBarColor">@color/gradientStart</item>
     </style>

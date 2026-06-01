@@ -3,7 +3,7 @@ package com.gulshid.weatherapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.yourname.weatherapp.databinding.ActivityMainBinding
+import com.gulshid.weatherapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
