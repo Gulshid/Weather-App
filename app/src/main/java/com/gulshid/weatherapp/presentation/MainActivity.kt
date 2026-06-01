@@ -44,9 +44,7 @@ class MainActivity : AppCompatActivity() {
     fun toggleTheme() {
         val isDark = prefs.getBoolean("dark_mode", true)
         prefs.edit().putBoolean("dark_mode", !isDark).apply()
-        AppCompatDelegate.setDefaultNightMode(
-            if (!isDark) AppCompatDelegate.MODE_NIGHT_YES
-            else AppCompatDelegate.MODE_NIGHT_NO
-        )
+        // ✅ recreate() preserves ViewModel state unlike setDefaultNightMode alone
+        recreate()
     }
 }

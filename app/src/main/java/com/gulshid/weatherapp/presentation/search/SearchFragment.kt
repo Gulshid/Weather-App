@@ -1,6 +1,5 @@
 package com.gulshid.weatherapp.presentation.search
 
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -71,12 +70,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private fun performSearch() {
         val city = binding.etSearch.text.toString().trim()
         if (city.isNotBlank()) {
-            // Pass city name back to HomeFragment via navigation arguments
-            val bundle = Bundle().apply { putString("cityName", city) }
-            findNavController().navigate(
-                com.gulshid.weatherapp.R.id.homeFragment,
-                bundle
-            )
+            // ✅ Pass city back via savedStateHandle — NOT navigate()
+            // This goes back to HomeFragment and delivers the city name
+            findNavController()
+                .previousBackStackEntry
+                ?.savedStateHandle
+                ?.set("cityName", city)
+            findNavController().popBackStack()
         }
     }
 }

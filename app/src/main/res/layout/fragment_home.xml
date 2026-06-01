@@ -13,15 +13,12 @@
         android:background="@color/gradientStart"
         android:fillViewport="true">
 
+        <!-- ROOT: vertical so top bar + content stack top-to-bottom -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="8dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:minHeight="64dp"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
 
             <!-- ── Top Bar ── -->
             <LinearLayout
