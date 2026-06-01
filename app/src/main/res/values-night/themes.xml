@@ -2,9 +2,13 @@
     <style name="Theme.WeatherApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorOnPrimary">@color/textPrimary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSurface">@color/cardBackground</item>
+        <item name="colorOnSurface">@color/white</item>
         <item name="android:windowBackground">@color/gradientStart</item>
         <item name="android:statusBarColor">@color/gradientStart</item>
         <item name="android:navigationBarColor">@color/gradientStart</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/textSecondary</item>
     </style>
 </resources>

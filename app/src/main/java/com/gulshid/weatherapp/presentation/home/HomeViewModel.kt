@@ -1,6 +1,5 @@
 package com.gulshid.weatherapp.presentation.home
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -13,45 +12,43 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * @HiltViewModel — Hilt creates and injects this ViewModel automatically.
- * Never instantiate ViewModels manually — always use 'by viewModels()'.
- */
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
     private val getLastUpdatedWeatherUseCase: GetLastUpdatedWeatherUseCase
 ) : BaseViewModel() {
 
-    // Private mutable — only ViewModel writes to this
     private val _weatherState = MutableLiveData<Resource<WeatherModel>>()
-
-    // Public immutable — Fragment only reads this
     val weatherState: LiveData<Resource<WeatherModel>> = _weatherState
 
-    // Remember the last searched city for retry button
+    // Unit toggle — true = Celsius, false = Fahrenheit
+    private val _isCelsius = MutableLiveData(true)
+    val isCelsius: LiveData<Boolean> = _isCelsius
+
+    // Track refresh state separately for SwipeRefresh spinner
+    private val _isRefreshing = MutableLiveData(false)
+    val isRefreshing: LiveData<Boolean> = _isRefreshing
+
     private var lastSearchedCity: String = ""
+    private var cachedWeather: WeatherModel? = null
 
     init {
-        // On app start, load last searched city from Room
         loadLastCity()
     }
 
-    /**
-     * Called when user searches for a city or retry is pressed.
-     */
     fun fetchWeather(cityName: String) {
         lastSearchedCity = cityName
         viewModelScope.launch {
             getCurrentWeatherUseCase(cityName).collect { resource ->
+                if (resource is Resource.Success) {
+                    cachedWeather = resource.data
+                }
                 _weatherState.value = resource
+                _isRefreshing.value = false
             }
         }
     }
 
-    /**
-     * Retry the last search — called from error state retry button.
-     */
     fun retry() {
         if (lastSearchedCity.isNotBlank()) {
             fetchWeather(lastSearchedCity)
@@ -59,16 +56,37 @@ class HomeViewModel @Inject constructor(
     }
 
     /**
-     * Load the last cached city when app opens.
-     * Shows data instantly while fresh data loads in background.
+     * Called by SwipeRefreshLayout — shows spinner at top instead
+     * of replacing the whole content with a loading state.
      */
+    fun refresh() {
+        _isRefreshing.value = true
+        if (lastSearchedCity.isNotBlank()) {
+            fetchWeather(lastSearchedCity)
+        } else {
+            _isRefreshing.value = false
+        }
+    }
+
+    /**
+     * Toggle between Celsius and Fahrenheit.
+     * Does NOT re-fetch — just flips the unit flag.
+     * The Fragment observes isCelsius and rebinds the temperature text.
+     */
+    fun toggleUnit() {
+        _isCelsius.value = !(_isCelsius.value ?: true)
+        // Re-emit cached weather so Fragment rebinds with new unit
+        cachedWeather?.let {
+            _weatherState.value = Resource.Success(it)
+        }
+    }
+
     private fun loadLastCity() {
         viewModelScope.launch {
             val lastWeather = getLastUpdatedWeatherUseCase()
             if (lastWeather != null) {
-                // Show cached data immediately
+                cachedWeather = lastWeather
                 _weatherState.value = Resource.Success(lastWeather)
-                // Then refresh in background
                 fetchWeather(lastWeather.cityName)
             }
         }
