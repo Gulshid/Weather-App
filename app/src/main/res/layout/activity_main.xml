@@ -7,16 +7,17 @@
     android:layout_height="match_parent">
 
     <!--
-        NavHostFragment is the container for all our Fragment screens.
-        The Navigation Component will swap fragments in and out here.
-        We'll add nav_graph.xml in Phase 4.
+        NavHostFragment is commented out until Phase 4
+        when we create the nav_graph.xml file.
+        Without a navGraph assigned, it crashes on launch.
     -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phase 1 ✅ Working!"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
