@@ -1,10 +1,5 @@
 package com.gulshid.weatherapp.domain.model
 
-/**
- * Pure Kotlin data class — ZERO Android imports.
- * This is what the UI layer works with exclusively.
- * It never knows about Retrofit DTOs or Room entities.
- */
 data class WeatherModel(
     val cityName: String,
     val country: String,
@@ -16,21 +11,50 @@ data class WeatherModel(
     val pressure: Int,
     val windSpeed: Double,
     val description: String,
-    val iconCode: String,       // used to build icon URL
+    val iconCode: String,
     val visibility: Int,
-    val sunrise: Long,          // unix timestamp
-    val sunset: Long,           // unix timestamp
-    val timestamp: Long         // when data was fetched
+    val sunrise: Long,
+    val sunset: Long,
+    val timestamp: Long
 ) {
-    /** Icon URL ready to load with Glide */
+    // ── Computed properties (no Android imports needed) ──────────────
+
+    /** Icon URL ready to pass to Glide */
     val iconUrl: String
         get() = "https://openweathermap.org/img/wn/$iconCode@2x.png"
 
-    /** Formatted temperature string */
-    val tempFormatted: String
+    /** Temperature in Celsius as display string */
+    val tempFormattedCelsius: String
         get() = "${tempCelsius.toInt()}°C"
 
-    /** Capitalize description */
+    /** Temperature converted to Fahrenheit */
+    val tempFahrenheit: Double
+        get() = (tempCelsius * 9 / 5) + 32
+
+    /** Temperature in Fahrenheit as display string */
+    val tempFormattedFahrenheit: String
+        get() = "${tempFahrenheit.toInt()}°F"
+
+    /** Feels like in Celsius */
+    val feelsLikeFormatted: String
+        get() = "Feels like ${feelsLike.toInt()}°C"
+
+    /** Capitalize first letter of description */
     val descriptionFormatted: String
         get() = description.replaceFirstChar { it.uppercase() }
+
+    /** Wind speed as display string */
+    val windSpeedFormatted: String
+        get() = "${windSpeed} m/s"
+
+    /** Visibility in km */
+    val visibilityFormatted: String
+        get() = "${visibility / 1000} km"
+
+    /**
+     * How old is this data?
+     * Returns true if data is older than 10 minutes → should refresh
+     */
+    val isStale: Boolean
+        get() = System.currentTimeMillis() - timestamp > 10 * 60 * 1000
 }

@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Weather App</string>
+    <string name="search_hint">Search city…</string>
+    <string name="feels_like">Feels like</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind_speed">Wind</string>
+    <string name="pressure">Pressure</string>
+    <string name="visibility">Visibility</string>
+    <string name="last_updated">Last updated: %1$s</string>
+    <string name="no_data">No weather data available</string>
+    <string name="error_network">No internet connection</string>
+    <string name="retry">Retry</string>
+    <string name="search_city">Search City</string>
+    <string name="loading">Loading weather…</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="five_day_forecast">5-Day Forecast</string>
 </resources>
